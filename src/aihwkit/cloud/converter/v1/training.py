@@ -23,10 +23,10 @@ from aihwkit.cloud.converter.exceptions import ConversionError
 from aihwkit.cloud.converter.v1.mappings import InverseMappings, Mappings
 from aihwkit.experiments.experiments.training import BasicTraining
 
-from aihwkit.cloud.converter.definitions.input_file_pb2 import (   # type: ignore[attr-defined]
+from aihwkit.cloud.converter.definitions.input_file_pb2 import (  # type: ignore[attr-defined]
     TrainingInput, Dataset, Training
 )
-from aihwkit.cloud.converter.definitions.common_pb2 import (    # type: ignore[attr-defined]
+from aihwkit.cloud.converter.definitions.common_pb2 import (  # type: ignore[attr-defined]
     LayerOrActivationFunction, LossFunctionProto, Network, LayerProto,
     ActivationFunctionProto, OptimizerProto, Version
 )
@@ -169,6 +169,7 @@ class BasicTrainingConverter:
 
 class BasicTrainingResultConverter:
     """Converter for `BasicTraining` results."""
+
     # pylint: disable=too-few-public-methods
 
     def from_proto(self, results: Any) -> Any:

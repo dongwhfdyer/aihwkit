@@ -618,7 +618,7 @@ class SoftBoundsPmaxDevice(SoftBoundsDevice):
     p_max: int = 1000
     """Number of pulses to drive the synapse from ``range_min`` to ``range_max``."""
 
-    alpha: float = 0.001/2
+    alpha: float = 0.001 / 2
     r"""The slope of the soft bounds model :math:`dw \propto \alpha w` for both
     up and down direction."""
 
@@ -642,7 +642,7 @@ class SoftBoundsPmaxDevice(SoftBoundsDevice):
             if key not in ['range_min', 'range_max', 'alpha', 'p_max']:
                 setattr(params, key, value)
 
-        b_factor = (self.range_max - self.range_min)/(1 - exp(-self.p_max * self.alpha))
+        b_factor = (self.range_max - self.range_min) / (1 - exp(-self.p_max * self.alpha))
         params.w_min = self.range_min
         params.w_max = self.range_min + b_factor
         params.dw_min = b_factor * self.alpha

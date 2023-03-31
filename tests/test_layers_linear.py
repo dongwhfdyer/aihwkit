@@ -28,7 +28,6 @@ from aihwkit.simulator.configs.utils import (
 from aihwkit.inference.compensation.drift import GlobalDriftCompensation
 from aihwkit.inference.noise.custom import StateIndependentNoiseModel
 
-
 from aihwkit.nn import AnalogSequential, AnalogLinear
 
 from .helpers.decorators import parametrize_over_layers
@@ -48,7 +47,7 @@ class LinearLayerTest(ParametrizedTestCase):
     @staticmethod
     def train_model(model, loss_func, x_b, y_b, **kwargs):
         """Train the model."""
-        opt = AnalogSGD(model.parameters(), lr=0.5,  **kwargs)
+        opt = AnalogSGD(model.parameters(), lr=0.5, **kwargs)
         opt.regroup_param_groups(model)
 
         epochs = 100

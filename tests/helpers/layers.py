@@ -112,7 +112,6 @@ class Conv1dMapped:
         return super().get_rpu_config(**kwargs)
 
     def get_layer(self, in_channels=2, out_channels=3, **kwargs):
-
         if not self.digital_bias and self.bias:
             raise SkipTest('Analog Bias is not supported.')
 
@@ -134,7 +133,6 @@ class Conv2dMapped:
         return super().get_rpu_config(**kwargs)
 
     def get_layer(self, in_channels=2, out_channels=3, **kwargs):
-
         if not self.digital_bias and self.bias:
             raise SkipTest('Analog Bias is not supported.')
 
@@ -156,7 +154,6 @@ class Conv3dMapped:
         return super().get_rpu_config(**kwargs)
 
     def get_layer(self, in_channels=2, out_channels=3, **kwargs):
-
         if not self.digital_bias and self.bias:
             raise SkipTest('Analog Bias is not supported.')
 

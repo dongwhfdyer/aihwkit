@@ -185,8 +185,8 @@ def test_evaluation(data, model, criterion):
         total_images += labels.size(0)
         predicted_ok += (predicted == labels).sum().item()
 
-    accuracy = predicted_ok/total_images*100
-    error = (1-predicted_ok/total_images)*100
+    accuracy = predicted_ok / total_images * 100
+    error = (1 - predicted_ok / total_images) * 100
     epoch_loss = total_loss / len(data.dataset)
 
     return epoch_loss, error, accuracy
@@ -405,7 +405,6 @@ crit = nn.CrossEntropyLoss()
 
 # Train the model
 results = training_phase(analog_model, crit, opt, training_data, valid_data)
-
 
 # Test model inference over time
 t_inference_lst = [0., 1., 20., 1000., 1e5, 1e7]

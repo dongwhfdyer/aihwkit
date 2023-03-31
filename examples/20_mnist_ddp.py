@@ -33,7 +33,6 @@ from torch.optim.lr_scheduler import StepLR
 
 from torchvision import datasets, transforms
 
-
 # Imports from aihwkit.
 from aihwkit.nn import AnalogLinear, AnalogLinearMapped, AnalogSequential
 from aihwkit.optim import AnalogSGD

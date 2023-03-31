@@ -108,11 +108,11 @@ class SerializationTest(ParametrizedTestCase):
         # Perform an update in order to modify tile weights and biases.
         loss_func = mse_loss
         if isinstance(model, (AnalogConv2d, AnalogConv2dMapped)):
-            input_x = Tensor(rand(2, 2, 3, 3))*0.2
-            input_y = Tensor(rand(2, 3, 5, 5))*0.2
+            input_x = Tensor(rand(2, 2, 3, 3)) * 0.2
+            input_y = Tensor(rand(2, 3, 5, 5)) * 0.2
         else:
-            input_x = Tensor(rand(2, model.in_features))*0.2
-            input_y = Tensor(rand(2, model.out_features))*0.2
+            input_x = Tensor(rand(2, model.in_features)) * 0.2
+            input_y = Tensor(rand(2, model.out_features)) * 0.2
 
         if self.use_cuda:
             input_x = input_x.cuda()
@@ -155,11 +155,11 @@ class SerializationTest(ParametrizedTestCase):
         # Perform an update in order to modify tile weights and biases.
         loss_func = mse_loss
         if isinstance(model, (AnalogConv2d, AnalogConv2dMapped)):
-            input_x = Tensor(rand(2, 2, 3, 3))*0.2
-            input_y = Tensor(rand(2, 3, 5, 5))*0.2
+            input_x = Tensor(rand(2, 2, 3, 3)) * 0.2
+            input_y = Tensor(rand(2, 3, 5, 5)) * 0.2
         else:
-            input_x = Tensor(rand(2, model.in_features))*0.2
-            input_y = Tensor(rand(2, model.out_features))*0.2
+            input_x = Tensor(rand(2, model.in_features)) * 0.2
+            input_y = Tensor(rand(2, model.out_features)) * 0.2
 
         if self.use_cuda:
             input_x = input_x.cuda()
@@ -201,11 +201,11 @@ class SerializationTest(ParametrizedTestCase):
         # Perform an update in order to modify tile weights and biases.
         loss_func = mse_loss
         if isinstance(model, (AnalogConv2d, AnalogConv2dMapped)):
-            input_x = Tensor(rand(2, 2, 3, 3))*0.2
-            input_y = Tensor(rand(2, 3, 5, 5))*0.2
+            input_x = Tensor(rand(2, 2, 3, 3)) * 0.2
+            input_y = Tensor(rand(2, 3, 5, 5)) * 0.2
         else:
-            input_x = Tensor(rand(2, model.in_features))*0.2
-            input_y = Tensor(rand(2, model.out_features))*0.2
+            input_x = Tensor(rand(2, model.in_features)) * 0.2
+            input_y = Tensor(rand(2, model.out_features)) * 0.2
 
         if self.use_cuda:
             input_x = input_x.cuda()
@@ -242,11 +242,11 @@ class SerializationTest(ParametrizedTestCase):
         # Perform an update in order to modify tile weights and biases.
         loss_func = mse_loss
         if isinstance(model, (AnalogConv2d, AnalogConv2dMapped)):
-            input_x = Tensor(rand(2, 2, 3, 3))*0.2
-            input_y = Tensor(rand(2, 3, 5, 5))*0.2
+            input_x = Tensor(rand(2, 2, 3, 3)) * 0.2
+            input_y = Tensor(rand(2, 3, 5, 5)) * 0.2
         else:
-            input_x = Tensor(rand(2, model.in_features))*0.2
-            input_y = Tensor(rand(2, model.out_features))*0.2
+            input_x = Tensor(rand(2, model.in_features)) * 0.2
+            input_y = Tensor(rand(2, model.out_features)) * 0.2
 
         if self.use_cuda:
             input_x = input_x.cuda()
@@ -566,6 +566,7 @@ class SerializationTest(ParametrizedTestCase):
 
         class CustomModule(Module):
             """Module that defines its children layers via custom attributes."""
+
             # pylint: disable=abstract-method
             def __init__(self, layer: Module):
                 super().__init__()

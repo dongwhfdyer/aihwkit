@@ -26,6 +26,7 @@ class AnalogRNNLayer(AnalogSequential):
               AnalogLSTMCellSingleRPU)
         cell_args: arguments to RNNCell (e.g. input_size, hidden_size, rpu_configs)
     """
+
     # pylint: disable=abstract-method
 
     def __init__(self, cell: Type, *cell_args: Any):
@@ -63,6 +64,7 @@ class AnalogReverseRNNLayer(AnalogSequential):
         cell: RNNCell type (AnalogLSTMCell/AnalogGRUCell/AnalogVanillaRNNCell)
         cell_args: arguments to RNNCell (e.g. input_size, hidden_size, rpu_configs)
     """
+
     def __init__(self, cell: Type, *cell_args: Any):
         super().__init__()
         self.cell = cell(*cell_args)

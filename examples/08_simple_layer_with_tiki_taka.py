@@ -44,19 +44,19 @@ rpu_config = UnitCellRPUConfig(
         ],
 
         # Make some adjustments of the way Tiki-Taka is performed.
-        units_in_mbatch=True,    # batch_size=1 anyway
-        transfer_every=2,        # every 2 batches do a transfer-read
+        units_in_mbatch=True,  # batch_size=1 anyway
+        transfer_every=2,  # every 2 batches do a transfer-read
         n_reads_per_transfer=1,  # one forward read for each transfer
-        gamma=0.0,               # all SGD weight in second device
+        gamma=0.0,  # all SGD weight in second device
         scale_transfer_lr=True,  # in relative terms to SGD LR
-        transfer_lr=1.0,         # same transfer LR as for SGD
-        fast_lr=0.1,             # SGD update onto first matrix constant
-        transfer_columns=True    # transfer use columns (not rows)
+        transfer_lr=1.0,  # same transfer LR as for SGD
+        fast_lr=0.1,  # SGD update onto first matrix constant
+        transfer_columns=True  # transfer use columns (not rows)
     )
 )
 
 # Make more adjustments (can be made here or above).
-rpu_config.forward.inp_res = 1/64.   # 6 bit DAC
+rpu_config.forward.inp_res = 1 / 64.  # 6 bit DAC
 
 # same backward pass settings as forward
 rpu_config.backward = rpu_config.forward
@@ -90,7 +90,6 @@ opt = AnalogSGD(model.parameters(), lr=0.1)
 opt.regroup_param_groups(model)
 
 for epoch in range(500):
-
     opt.zero_grad()
 
     # Add the training Tensor to the model (input).

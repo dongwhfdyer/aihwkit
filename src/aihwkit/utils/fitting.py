@@ -248,10 +248,10 @@ def model_response(params: Parameters,
     # tile, repeats are quick though
     no_list = False
     if not isinstance(pulse_data, tuple):
-        pulse_data = (pulse_data, )
-        response_data = (response_data, )  # type: ignore
+        pulse_data = (pulse_data,)
+        response_data = (response_data,)  # type: ignore
         if fit_weights is not None:
-            fit_weights = (fit_weights, )  # type: ignore
+            fit_weights = (fit_weights,)  # type: ignore
         no_list = True
 
     numpy_pulses = array(pulse_data[0])

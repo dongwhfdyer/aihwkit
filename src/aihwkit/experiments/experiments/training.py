@@ -77,7 +77,7 @@ class BasicTraining(Experiment):
 
     def get_dataset_arguments(self, dataset: type) -> Tuple[Dict, Dict]:
         """Return the dataset constructor arguments for specifying subset."""
-        if dataset in (SVHN, ):
+        if dataset in (SVHN,):
             return {'split': 'train'}, {'split': 'test'}
         return {'train': True}, {'train': False}
 
@@ -191,7 +191,7 @@ class BasicTraining(Experiment):
 
             self._call_hook(Signals.TRAIN_EPOCH_BATCH_END,
                             batch_image_count,
-                            loss.item()*batch_image_count)
+                            loss.item() * batch_image_count)
 
     def validation_step(
             self,
@@ -227,7 +227,7 @@ class BasicTraining(Experiment):
             self._call_hook(Signals.VALIDATION_EPOCH_BATCH_END,
                             batch_image_count,
                             batch_correct_count,
-                            loss.item()*batch_image_count)
+                            loss.item() * batch_image_count)
 
     def train(
             self,
@@ -314,11 +314,11 @@ class BasicTraining(Experiment):
         """Return a string representation of a BasicTraining experiment."""
         return ('{}(dataset={}, batch_size={}, loss_function={}, epochs={}, '
                 'learning_rate={}, model={})'.format(
-                    self.__class__.__name__,
-                    getattr(self.dataset, '__name__', self.dataset),
-                    self.batch_size,
-                    getattr(self.loss_function, '__name__', self.loss_function),
-                    self.epochs,
-                    self.learning_rate,
-                    self.model
-                ))
+            self.__class__.__name__,
+            getattr(self.dataset, '__name__', self.dataset),
+            self.batch_size,
+            getattr(self.loss_function, '__name__', self.loss_function),
+            self.epochs,
+            self.learning_rate,
+            self.model
+        ))

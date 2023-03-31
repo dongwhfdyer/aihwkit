@@ -98,7 +98,7 @@ class ExperimentParser:
 
         if job_status in ('waiting', 'validating', 'validated'):
             return CloudJobStatus.WAITING
-        if job_status in ('running', ):
+        if job_status in ('running',):
             return CloudJobStatus.RUNNING
         if job_status in ('failed', 'cancelled'):
             return CloudJobStatus.FAILED
@@ -149,6 +149,7 @@ class ExperimentParser:
 
 class GeneralParser:
     """Parser for generic responses."""
+
     # pylint: disable=too-few-public-methods
 
     @staticmethod

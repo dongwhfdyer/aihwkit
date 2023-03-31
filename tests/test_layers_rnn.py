@@ -20,7 +20,7 @@ from aihwkit.optim.context import AnalogContext
 
 from .helpers.decorators import parametrize_over_layers
 from .helpers.layers import LSTM, LSTMCuda, GRU, GRUCuda, VanillaRNN, VanillaRNNCuda, \
-                            LSTMCombinedWeight, LSTMCombinedWeightCuda
+    LSTMCombinedWeight, LSTMCombinedWeightCuda
 from .helpers.testcases import ParametrizedTestCase
 from .helpers.tiles import FloatingPoint, Inference
 
@@ -116,6 +116,7 @@ class RNNLayerTest(ParametrizedTestCase):
 
     def test_layer_training(self):
         """Test AnalogLSTM layer training."""
+
         # pylint: disable=too-many-locals, too-many-statements
         def get_parameters(model, analog_if) -> dict:
             """Returns the parameter in an dict."""
@@ -218,6 +219,7 @@ class RNNLayerTest(ParametrizedTestCase):
 
     def test_bidir_layer_training(self):
         """Test AnalogLSTM bidirectional layer training."""
+
         # pylint: disable=too-many-locals, too-many-statements
         def get_parameters(model, analog_if) -> dict:
             """Returns the parameter in an dict."""
@@ -348,7 +350,7 @@ class LSTMCombinedWeightTest(RNNLayerTest):
         for i, layer in enumerate(model.rnn.layers):
             # Assert over the size of weight_ih.
             if i == 0:
-                self.assertEqual(layer.cell.weight.in_features, input_size+hidden_size)
+                self.assertEqual(layer.cell.weight.in_features, input_size + hidden_size)
             else:
                 self.assertEqual(layer.cell.weight.in_features, 2 * hidden_size)
             self.assertEqual(layer.cell.weight.out_features, 4 * hidden_size)
@@ -363,6 +365,7 @@ class LSTMCombinedWeightTest(RNNLayerTest):
 
     def test_layer_training(self):
         """Test AnalogLSTM layer training."""
+
         # pylint: disable=too-many-locals, too-many-statements
         def get_parameters(model, analog_if) -> dict:
             """Returns the parameter in an dict."""

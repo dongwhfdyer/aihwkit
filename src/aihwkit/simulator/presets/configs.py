@@ -544,7 +544,7 @@ class TikiTakaReRamESPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -572,7 +572,7 @@ class TikiTakaReRamSBPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -600,7 +600,7 @@ class TikiTakaCapacitorPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -628,7 +628,7 @@ class TikiTakaEcRamPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -656,7 +656,7 @@ class TikiTakaEcRamMOPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -684,10 +684,11 @@ class TikiTakaIdealizedPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
+
 
 # TTv2 configs.
 
@@ -714,7 +715,7 @@ class TTv2ReRamESPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -742,7 +743,7 @@ class TTv2ReRamSBPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -770,7 +771,7 @@ class TTv2CapacitorPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -798,7 +799,7 @@ class TTv2EcRamPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -826,7 +827,7 @@ class TTv2EcRamMOPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
@@ -854,10 +855,11 @@ class TTv2IdealizedPreset(UnitCellRPUConfig):
             transfer_update=PresetUpdateParameters(),
             transfer_every=1.0,
             units_in_mbatch=True,
-            ))
+        ))
     forward: IOParameters = field(default_factory=PresetIOParameters)
     backward: IOParameters = field(default_factory=PresetIOParameters)
     update: UpdateParameters = field(default_factory=PresetUpdateParameters)
+
 
 # Mixed precision presets
 

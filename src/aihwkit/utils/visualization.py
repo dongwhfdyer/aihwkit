@@ -147,6 +147,7 @@ def compute_pulse_statistics(
     Returns:
         Tuple of ``(dw_mean, dw_std)``.
     """
+
     # pylint: disable=too-many-locals
 
     def calc_mean_and_std(
@@ -161,12 +162,12 @@ def compute_pulse_statistics(
             In case there are multiple trials then it also includes
             device-to-device variation.
         """
-        alpha = np.exp(-0.5*(node - w_values)**2/lam**2)
+        alpha = np.exp(-0.5 * (node - w_values) ** 2 / lam ** 2)
         beta = alpha.sum(axis=0)
         alpha[:, beta < 0.1] = np.nan
         alpha /= np.expand_dims(beta, axis=0)  # type: ignore
-        mean = np.sum(alpha*delta_w, axis=0)
-        std = np.sqrt(np.sum(alpha*(delta_w - np.expand_dims(mean, axis=0))**2,  # type: ignore
+        mean = np.sum(alpha * delta_w, axis=0)
+        std = np.sqrt(np.sum(alpha * (delta_w - np.expand_dims(mean, axis=0)) ** 2,  # type: ignore
                              axis=0))
         return (mean, std)
 
@@ -185,7 +186,7 @@ def compute_pulse_statistics(
     dw_mean = np.zeros((len(w_nodes), w_trace.shape[1], w_trace.shape[2]))
     dw_std = np.zeros((len(w_nodes), w_trace.shape[1], w_trace.shape[2]))
 
-    lam = (w_nodes[1]-w_nodes[0])/2*smoothness
+    lam = (w_nodes[1] - w_nodes[0]) / 2 * smoothness
     for i, node in enumerate(w_nodes):
         dw_mean[i, :, :], dw_std[i, :, :] = calc_mean_and_std(node, w_values, delta_w_values, lam)
 
@@ -276,7 +277,7 @@ def get_tile_for_plotting(
             setattr(dev, 'transfer_update', UpdateParameters(pulse_type=PulseType.NONE))
 
         if (hasattr(dev, 'write_noise_std') and
-           getattr(dev, 'write_noise_std') > 0.0):
+                getattr(dev, 'write_noise_std') > 0.0):
             # Just make very small to avoid hidden parameter mismatch.
             setattr(dev, 'write_noise_std', 1e-6)
 
@@ -370,8 +371,8 @@ def plot_response_overview(
     if n_steps is None:
         n_steps = estimate_n_steps(rpu_config)
 
-    total_iters = min(max(n_loops*2*n_steps, 1000), max(50000, 2*n_steps))
-    direction = np.sign(np.sin(np.pi*(np.arange(total_iters)+1)/n_steps))
+    total_iters = min(max(n_loops * 2 * n_steps, 1000), max(50000, 2 * n_steps))
+    direction = np.sign(np.sin(np.pi * (np.arange(total_iters) + 1) / n_steps))
 
     plt.clf()
 
@@ -413,11 +414,11 @@ def plot_device(device: Union[PulsedDevice, UnitCell], w_noise: float = 0.0, **k
     """
     plt.figure(figsize=[7, 7])
     # To simulate some weight read noise.
-    io_pars = IOParameters(out_noise=0.0,    # no out noise
+    io_pars = IOParameters(out_noise=0.0,  # no out noise
                            w_noise=w_noise,  # quite low
-                           inp_res=-1.,      # turn off DAC
-                           out_bound=100.,   # not limiting
-                           out_res=-1.,      # turn off ADC
+                           inp_res=-1.,  # turn off DAC
+                           out_bound=100.,  # not limiting
+                           out_res=-1.,  # turn off ADC
                            bound_management=BoundManagementType.NONE,
                            noise_management=NoiseManagementType.NONE,
                            w_noise_type=WeightNoiseType.ADDITIVE_CONSTANT)
@@ -453,6 +454,7 @@ def plot_device_compact(
     Returns:
         the compact step response figure.
     """
+
     # pylint: disable=too-many-locals,too-many-statements
     def get_rpu_config(device: Union[PulsedDevice, UnitCell], io_pars: IOParameters) \
             -> Union[SingleRPUConfig, UnitCellRPUConfig]:
@@ -463,11 +465,11 @@ def plot_device_compact(
     figure = plt.figure(figsize=[12, 4])
 
     # To simulate some weight read noise.
-    io_pars = IOParameters(out_noise=0.0,    # no out noise
+    io_pars = IOParameters(out_noise=0.0,  # no out noise
                            w_noise=w_noise,  # quite low
-                           inp_res=-1.,      # turn off DAC
-                           out_bound=100.,   # not limiting
-                           out_res=-1.,      # turn off ADC
+                           inp_res=-1.,  # turn off DAC
+                           out_bound=100.,  # not limiting
+                           out_res=-1.,  # turn off ADC
                            bound_management=BoundManagementType.NONE,
                            noise_management=NoiseManagementType.NONE,
                            w_noise_type=WeightNoiseType.ADDITIVE_CONSTANT)
@@ -479,25 +481,25 @@ def plot_device_compact(
 
     # Noisy tile response curves.
     n_loops = 2
-    total_iters = n_loops*2*n_steps
-    direction = np.sign(np.sin(np.pi*(np.arange(total_iters)+1)/n_steps))
+    total_iters = n_loops * 2 * n_steps
+    direction = np.sign(np.sin(np.pi * (np.arange(total_iters) + 1) / n_steps))
 
     analog_tile = get_tile_for_plotting(rpu_config, n_traces, use_cuda, noise_free=False)
-    w_trace = compute_pulse_response(analog_tile, direction, use_forward=True)\
+    w_trace = compute_pulse_response(analog_tile, direction, use_forward=True) \
         .reshape(-1, n_traces)
     axis = figure.add_subplot(1, 1, 1)
     axis.plot(w_trace, linewidth=1)
     axis.set_title(analog_tile.rpu_config.device.__class__.__name__)
     axis.set_xlabel('Pulse number \\#')
-    limit = np.abs(w_trace).max()*1.2
+    limit = np.abs(w_trace).max() * 1.2
     axis.set_ylim(-limit, limit)
-    axis.set_xlim(0, total_iters-1)
+    axis.set_xlim(0, total_iters - 1)
     axis.xaxis.set_major_formatter(ticker.ScalarFormatter(useMathText=True))
 
     # Noise-free tile for statistics.
     n_loops = 1
-    total_iters = min(max(n_loops*2*n_steps, 1000), max(50000, 2*n_steps))
-    direction = np.sign(np.sin(np.pi*(np.arange(total_iters)+1)/n_steps))
+    total_iters = min(max(n_loops * 2 * n_steps, 1000), max(50000, 2 * n_steps))
+    direction = np.sign(np.sin(np.pi * (np.arange(total_iters) + 1) / n_steps))
 
     analog_tile_noise_free = get_tile_for_plotting(rpu_config, n_traces, use_cuda, noise_free=True)
     analog_tile_noise_free.set_hidden_parameters(analog_tile.get_hidden_parameters())
@@ -508,16 +510,16 @@ def plot_device_compact(
     num_nodes = min(n_steps, 100)
     w_nodes = np.linspace(w_trace.min(), w_trace.max(), num_nodes)
 
-    dw_mean_up = compute_pulse_statistics(w_nodes, w_trace, direction, True)[0]\
+    dw_mean_up = compute_pulse_statistics(w_nodes, w_trace, direction, True)[0] \
         .reshape(-1, n_traces)
-    dw_mean_down = compute_pulse_statistics(w_nodes, w_trace, direction, False)[0]\
+    dw_mean_down = compute_pulse_statistics(w_nodes, w_trace, direction, False)[0] \
         .reshape(-1, n_traces)
 
     # Plot mean up statistics.
     pos = axis.get_position().bounds
     space = 0.1
     gap = 0.01
-    axis.set_position([pos[0] + gap + space, pos[1], pos[2] - 2*gap - 2*space, pos[3]])
+    axis.set_position([pos[0] + gap + space, pos[1], pos[2] - 2 * gap - 2 * space, pos[3]])
     axis.set_yticks([])
 
     axis_left = figure.add_axes([pos[0], pos[1], space, pos[3]])
@@ -575,22 +577,22 @@ def plot_device_symmetry(
     """
     plt.figure(figsize=[10, 5])
 
-    io_pars = IOParameters(out_noise=0.0,    # no out noise
+    io_pars = IOParameters(out_noise=0.0,  # no out noise
                            w_noise=w_noise,  # quite low
-                           inp_res=-1.,      # turn off DAC
-                           out_bound=100.,   # not limiting
-                           out_res=-1.,      # turn off ADC
+                           inp_res=-1.,  # turn off DAC
+                           out_bound=100.,  # not limiting
+                           out_res=-1.,  # turn off ADC
                            bound_management=BoundManagementType.NONE,
                            noise_management=NoiseManagementType.NONE,
                            w_noise_type=WeightNoiseType.ADDITIVE_CONSTANT)
 
     rpu_config = SingleRPUConfig(device=device, forward=io_pars)
 
-    direction = np.sign(np.cos(np.pi*np.arange(n_pulses)))
+    direction = np.sign(np.cos(np.pi * np.arange(n_pulses)))
     plt.clf()
 
     analog_tile = get_tile_for_plotting(rpu_config, n_traces, use_cuda, noise_free=False)
-    weights = w_init*ones((n_traces, 1))
+    weights = w_init * ones((n_traces, 1))
     analog_tile.set_weights(weights)
 
     plot_pulse_response(analog_tile, direction, use_forward=False)

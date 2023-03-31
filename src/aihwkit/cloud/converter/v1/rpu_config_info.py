@@ -104,13 +104,13 @@ class RPUconfigInfo:
                     rpu_config.forward.inp_res, self._analog_info.dac)),
                 ('noise_model', rpu_config.noise_model),
                 ('noise_model.read_noise_scale',
-                    rpu_config.noise_model.read_noise_scale),  # type: ignore[attr-defined]
+                 rpu_config.noise_model.read_noise_scale),  # type: ignore[attr-defined]
                 ('noise_model.prog_noise_scale',
-                    rpu_config.noise_model.prog_noise_scale),  # type: ignore[attr-defined]
+                 rpu_config.noise_model.prog_noise_scale),  # type: ignore[attr-defined]
                 ('drift_compensation',
-                    rpu_config.drift_compensation),  # type: ignore[attr-defined]
+                 rpu_config.drift_compensation),  # type: ignore[attr-defined]
                 ('noise_model.drift_scale',
-                    rpu_config.noise_model.drift_scale),  # type: ignore[attr-defined]
+                 rpu_config.noise_model.drift_scale),  # type: ignore[attr-defined]
             }
 
         )
@@ -159,30 +159,30 @@ class RPUconfigInfo:
         rpu_config.forward.out_noise = self._analog_info.output_noise_strength
 
         # changed input/output res to use a formula. print out adc and dac
-        rpu_config.forward.out_res = 1.0 / (2**self._analog_info.adc - 2)
-        rpu_config.forward.inp_res = 1.0 / (2**self._analog_info.dac - 2)
+        rpu_config.forward.out_res = 1.0 / (2 ** self._analog_info.adc - 2)
+        rpu_config.forward.inp_res = 1.0 / (2 ** self._analog_info.dac - 2)
 
         # Assign values from NoiseModelProto (CM Noise model)
         self._device_id = self._noise_model_info.device_id
         if self._device_id == NoiseModelInfo.PCM:
             rpu_config.noise_model = (
                 PCMLikeNoiseModel(
-                                g_max=25.0,
-                                prog_coeff=[
-                                    self._noise_model_info.poly_constant_coef,
-                                    self._noise_model_info.poly_first_order_coef,
-                                    self._noise_model_info.poly_second_order_coef,
-                                ]
+                    g_max=25.0,
+                    prog_coeff=[
+                        self._noise_model_info.poly_constant_coef,
+                        self._noise_model_info.poly_first_order_coef,
+                        self._noise_model_info.poly_second_order_coef,
+                    ]
                 )
             )
         elif self._device_id == NoiseModelInfo.GENERIC:
             rpu_config.noise_model = StateIndependentNoiseModel(
-                                g_max=25.0,
-                                prog_coeff=[
-                                    self._noise_model_info.poly_constant_coef,
-                                    self._noise_model_info.poly_first_order_coef,
-                                    self._noise_model_info.poly_second_order_coef,
-                                ]
+                g_max=25.0,
+                prog_coeff=[
+                    self._noise_model_info.poly_constant_coef,
+                    self._noise_model_info.poly_first_order_coef,
+                    self._noise_model_info.poly_second_order_coef,
+                ]
             )
 
             # These are unique to generic
@@ -201,7 +201,7 @@ class RPUconfigInfo:
             self._noise_model_info.programming_noise_scale
         )
         rpu_config.noise_model.read_noise_scale = (  # type: ignore[attr-defined]
-                self._noise_model_info.read_noise_scale
+            self._noise_model_info.read_noise_scale
         )
 
         # Drift compensation in protobuf is boolean (bool)
@@ -210,7 +210,7 @@ class RPUconfigInfo:
             rpu_config.drift_compensation = GlobalDriftCompensation()
 
         rpu_config.noise_model.drift_scale = (  # type: ignore[attr-defined]
-                self._noise_model_info.drift_scale
+            self._noise_model_info.drift_scale
         )
 
         if verbose:

@@ -26,7 +26,6 @@ from aihwkit.simulator.presets import (
     PCMPresetUnitCell,
 )
 
-
 plt.ion()
 
 # Note alternatively one can use plot_device_compact for a more compact

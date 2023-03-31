@@ -43,6 +43,7 @@ class AnalogSequential(Sequential):
         layers. If using regular containers, please be aware that operations
         need to be applied manually to the children analog layers when needed.
     """
+
     # pylint: disable=abstract-method
 
     def _apply_to_analog(self, fn: Callable) -> 'AnalogSequential':

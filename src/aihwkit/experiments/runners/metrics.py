@@ -66,9 +66,9 @@ class LocalMetric:
             return
 
         print('Epoch: {}, loss: {:.8f}'.format(
-                self.current_epoch['number'],
-                self.current_epoch['total_loss'] / self.current_epoch['training_images'],
-              ))
+            self.current_epoch['number'],
+            self.current_epoch['total_loss'] / self.current_epoch['training_images'],
+        ))
 
     def receive_validation_epoch_end(self) -> None:
         """Hook for `VALIDATION_EPOCH_END`."""

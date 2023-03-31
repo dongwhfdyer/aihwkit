@@ -201,7 +201,7 @@ class StateIndependentNoiseModel(BaseNoiseModel):  # pylint: disable=too-many-in
         if t > 0:
             sig_noise = sqrt(numpy_log((t + self.t_read) / (2 * self.t_read)))
             g_final = g_drift + torch_abs(g_drift / self.g_max) * self.read_noise_scale \
-                * sig_noise * randn_like(g_drift)
+                      * sig_noise * randn_like(g_drift)
         else:
             g_final = g_prog
 

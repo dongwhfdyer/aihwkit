@@ -36,7 +36,6 @@ from aihwkit.simulator.presets import TikiTakaEcRamPreset
 from aihwkit.simulator.configs import MappingParameter
 from aihwkit.simulator.rpu_base import cuda
 
-
 # Device to use
 USE_CUDA = 0
 if cuda.is_compiled():
@@ -112,7 +111,7 @@ def create_model():
 
     block_per_layers = (3, 4, 6, 3)
     base_channel = 16
-    channel = (base_channel, 2*base_channel, 4*base_channel)
+    channel = (base_channel, 2 * base_channel, 4 * base_channel)
 
     l0 = nn.Sequential(
         nn.Conv2d(3, channel[0], kernel_size=3, stride=1, padding=1),
@@ -232,8 +231,8 @@ def test_evaluation(validation_data, model, criterion):
         _, predicted = torch_max(pred.data, 1)
         total_images += labels.size(0)
         predicted_ok += (predicted == labels).sum().item()
-        accuracy = predicted_ok/total_images*100
-        error = (1-predicted_ok/total_images)*100
+        accuracy = predicted_ok / total_images * 100
+        error = (1 - predicted_ok / total_images) * 100
 
     epoch_loss = total_loss / len(validation_data.dataset)
 

@@ -83,8 +83,8 @@ class ReRamSBPresetDevice(SoftBoundsDevice):
     dw_min_dtod: float = 0.3
     up_down_dtod: float = 0.01  # assumes symmetry point corrected.
 
-    w_max_dtod: float = 0.3/1.25
-    w_min_dtod: float = 0.3/0.75
+    w_max_dtod: float = 0.3 / 1.25
+    w_min_dtod: float = 0.3 / 0.75
 
     # Cycle-to_cycle.
     dw_min_std: float = 3.75

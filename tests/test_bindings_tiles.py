@@ -103,14 +103,14 @@ class BindingsTilesTest(ParametrizedTestCase):
         decay_rate = 0.1
 
         # Use custom parameters for the tile.
-        python_tile = self.get_custom_tile(2, 3, lifetime=1.0/decay_rate)
+        python_tile = self.get_custom_tile(2, 3, lifetime=1.0 / decay_rate)
         cpp_tile = python_tile.tile
 
         init_weights = cpp_tile.get_weights().numpy()
         cpp_tile.decay_weights(1.0)
         weights = cpp_tile.get_weights().numpy()
 
-        assert_array_almost_equal(weights, init_weights*(1.0 - decay_rate))
+        assert_array_almost_equal(weights, init_weights * (1.0 - decay_rate))
 
     def test_diffuse_weights(self):
         """Check diffusing the weights."""
@@ -125,8 +125,8 @@ class BindingsTilesTest(ParametrizedTestCase):
         weights = cpp_tile.get_weights().numpy()
 
         deviation_std = std((weights - init_weights).flatten())
-        self.assertLess(deviation_std, 1.1*diffusion_rate)
-        self.assertGreater(deviation_std, 0.9*diffusion_rate)
+        self.assertLess(deviation_std, 1.1 * diffusion_rate)
+        self.assertGreater(deviation_std, 0.9 * diffusion_rate)
 
     def test_drift_weights(self):
         """Check drifting the weights."""
@@ -141,7 +141,7 @@ class BindingsTilesTest(ParametrizedTestCase):
         cpp_tile.drift_weights(delta_t)
         weights = cpp_tile.get_weights()
 
-        assert_array_almost_equal(weights, init_weights*(delta_t)**(-nu))
+        assert_array_almost_equal(weights, init_weights * (delta_t) ** (-nu))
 
     def test_mimic_rpu_mac(self):
         """Check using the update, forward and backward functions."""
@@ -177,7 +177,7 @@ class BindingsTilesTest(ParametrizedTestCase):
         # Perform update.
         cpp_tile.update(x_t, d_t, bias=False)
         post_rank_weights = cpp_tile.get_weights()
-        ref_weights = init_weights - lr*dot(d_t.cpu().T, x_t.cpu())
+        ref_weights = init_weights - lr * dot(d_t.cpu().T, x_t.cpu())
 
         assert_array_almost_equal(post_rank_weights, ref_weights)
 
@@ -301,7 +301,7 @@ class FloatingPointTileTest(ParametrizedTestCase):
         d_t = d_t.detach().cpu().numpy()
         d_t = reshape(d_t, [-1, out_size])
 
-        ref_weights = init_weights - lr*dot(d_t.T, x_t)
+        ref_weights = init_weights - lr * dot(d_t.T, x_t)
         assert_array_almost_equal(updated_weights, ref_weights)
 
 

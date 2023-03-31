@@ -26,7 +26,7 @@ from aihwkit.cloud.converter.v1.i_mappings import (
 from aihwkit.experiments.experiments.inferencing import (  # type: ignore[import]
     BasicInferencing
 )
-from aihwkit.cloud.converter.definitions.i_input_file_pb2 import (   # type: ignore[attr-defined]
+from aihwkit.cloud.converter.definitions.i_input_file_pb2 import (  # type: ignore[attr-defined]
     InferenceInput,
     Dataset,
     Inferencing,
@@ -35,7 +35,7 @@ from aihwkit.cloud.converter.definitions.i_input_file_pb2 import (   # type: ign
     AnalogProto
 )
 
-from aihwkit.cloud.converter.definitions.i_common_pb2 import (   # type: ignore[attr-defined]
+from aihwkit.cloud.converter.definitions.i_common_pb2 import (  # type: ignore[attr-defined]
     LayerOrActivationFunction,
     Network,
     LayerProto,
@@ -175,8 +175,8 @@ class BasicInferencingConverter:
                     poly_first_order_coef=noise_model_info['poly_first_order_coef'],
                     poly_second_order_coef=noise_model_info['poly_second_order_coef'],
                     poly_constant_coef=noise_model_info['poly_constant_coef']
-                    )
                 )
+            )
         else:
             model = NoiseModelProto(
                 generic=GenericProto(
@@ -190,7 +190,7 @@ class BasicInferencingConverter:
                     poly_constant_coef=noise_model_info['poly_constant_coef'],
                     drift_mean=noise_model_info['drift_mean'],
                     drift_std=noise_model_info['drift_std'],
-                    )
+                )
             )
         return model
 
@@ -248,10 +248,10 @@ class BasicInferencingConverter:
         inferencing = inference_pb.inferencing  # type: ignore[attr-defined]
         network = inference_pb.network  # type: ignore[attr-defined]
         return {
-                    'inference_repeats': inferencing.inference_repeats,
-                    'inference_time': inferencing.inference_time,
-                    'weight_template_id': network.weight_template_id
-                }
+            'inference_repeats': inferencing.inference_repeats,
+            'inference_time': inferencing.inference_time,
+            'weight_template_id': network.weight_template_id
+        }
 
     @staticmethod
     def _model_from_proto(network: Network,  # type: ignore[valid-type]
@@ -277,12 +277,12 @@ class BasicInferencingConverter:
         """Converts from protobuf analog_info to a dictionary"""
 
         return {
-                    'output_noise_strength': (
-                        analog_info.output_noise_strength  # type: ignore[attr-defined]
-                    ),
-                    'adc': analog_info.adc,  # type: ignore[attr-defined]
-                    'dac': analog_info.dac  # type: ignore[attr-defined]
-                }
+            'output_noise_strength': (
+                analog_info.output_noise_strength  # type: ignore[attr-defined]
+            ),
+            'adc': analog_info.adc,  # type: ignore[attr-defined]
+            'dac': analog_info.dac  # type: ignore[attr-defined]
+        }
 
     @staticmethod
     def _noise_model_from_proto(
@@ -342,7 +342,7 @@ class BasicInferencingResultConverter:
         # Create an InferenceRunsProto object
         i_runs = inference_input.inference_runs  # type: ignore
 
-        results = []        # this is a list
+        results = []  # this is a list
 
         # loop through all the results and append directly to InferenceRunsProto field
         for result in i_runs.inference_results:
@@ -375,7 +375,7 @@ class BasicInferencingResultConverter:
         # Create an InferenceRunsProto object
         i_runs = inference_input.inference_runs  # type: ignore
 
-        results = []        # this is a list
+        results = []  # this is a list
 
         # loop through all the results and append directly to InferenceRunsProto field
         for result in i_runs.inference_results:
@@ -422,9 +422,9 @@ class BasicInferencingResultConverter:
 
         # Create object with constructor specifying the scalar values only
         irp = InferenceRunsProto(
-                inference_repeat=inference_repeat,
-                is_partial=is_partial,
-                time_elapsed=time_elapsed)
+            inference_repeat=inference_repeat,
+            is_partial=is_partial,
+            time_elapsed=time_elapsed)
 
         # inference_results field is an array in protobuf and a list of
         #    dictionaries in the passed results
@@ -433,13 +433,13 @@ class BasicInferencingResultConverter:
         #    to the InferenceRunsProto object field
         i_results = results['inference_results']
         for result in i_results:
-            irp.inference_results.append(       # pylint: disable=no-member
-               InferenceResultsProto(
-                   t_inference=result['t_inference'],
-                   avg_accuracy=result['avg_accuracy'],
-                   std_accuracy=result['std_accuracy'],
-                   avg_error=result['avg_error'],
-                   avg_loss=result['avg_loss']
-               ))
+            irp.inference_results.append(  # pylint: disable=no-member
+                InferenceResultsProto(
+                    t_inference=result['t_inference'],
+                    avg_accuracy=result['avg_accuracy'],
+                    std_accuracy=result['std_accuracy'],
+                    avg_error=result['avg_error'],
+                    avg_loss=result['avg_loss']
+                ))
 
         return irp

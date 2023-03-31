@@ -40,6 +40,7 @@ class TransferCompoundTest(ParametrizedTestCase):
     @staticmethod
     def get_transfer_compound(gamma, **kwargs):
         """Get a Tiki-taka compound with reference cell """
+
         def custom_device(**kwargs):
             """Custom device """
             return SoftBoundsDevice(w_max_dtod=0.0, w_min_dtod=0.0, w_max=1.0, w_min=-1.0, **kwargs)
@@ -74,10 +75,10 @@ class TransferCompoundTest(ParametrizedTestCase):
 
             # just dummy settings
             a, b, c, d = 0.47, 0.21, 0.64, 0.12
-            params['hidden_weights_0_0'] = a*ones(*shape)  # A
-            params['hidden_weights_1_0'] = b*ones(*shape)  # A ref
-            params['hidden_weights_0_1'] = c*ones(*shape)  # C
-            params['hidden_weights_1_1'] = d*ones(*shape)  # C_ref
+            params['hidden_weights_0_0'] = a * ones(*shape)  # A
+            params['hidden_weights_1_0'] = b * ones(*shape)  # A ref
+            params['hidden_weights_0_1'] = c * ones(*shape)  # C
+            params['hidden_weights_1_1'] = d * ones(*shape)  # C_ref
 
             model.analog_tile.set_hidden_parameters(params)
 
@@ -87,9 +88,9 @@ class TransferCompoundTest(ParametrizedTestCase):
             if self.digital_bias:
                 self.assertEqual(bias[0], 0.0)
             if self.bias and not self.digital_bias:
-                self.assertEqual(bias[0], gamma*(a - b) + c - d)
+                self.assertEqual(bias[0], gamma * (a - b) + c - d)
 
-            self.assertEqual(weight[0][0], gamma*(a - b) + c - d)
+            self.assertEqual(weight[0][0], gamma * (a - b) + c - d)
 
     def test_decay(self):
         """Test hidden parameter set."""
@@ -158,6 +159,6 @@ class TransferCompoundTest(ParametrizedTestCase):
         if self.digital_bias:
             self.assertAlmostEqual(bias[0].item(), 0.0)
         if self.bias and not self.digital_bias:
-            self.assertAlmostEqual(bias[0].item(), gamma*(a - b) + c - d, 5)
+            self.assertAlmostEqual(bias[0].item(), gamma * (a - b) + c - d, 5)
 
-        self.assertAlmostEqual(weight[0][0].item(), gamma*(a - b) + c - d, 5)
+        self.assertAlmostEqual(weight[0][0].item(), gamma * (a - b) + c - d, 5)

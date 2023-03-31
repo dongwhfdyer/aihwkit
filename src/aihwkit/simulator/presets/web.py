@@ -20,7 +20,7 @@ from aihwkit.simulator.configs.configs import (
 )
 
 from aihwkit.simulator.configs.utils import (
-    IOParameters, WeightClipParameter,  WeightModifierParameter, MappingParameter,
+    IOParameters, WeightClipParameter, WeightModifierParameter, MappingParameter,
     BoundManagementType, NoiseManagementType, WeightNoiseType, WeightModifierType,
     WeightClipType
 )
@@ -40,12 +40,12 @@ class WebComposerIOParameters(IOParameters):
     bound_management: BoundManagementType = BoundManagementType.ITERATIVE
     noise_management: NoiseManagementType = NoiseManagementType.ABS_MAX
 
-    inp_res: float = 1.0 / (2**7 - 2)  # 7 bit DAC.
+    inp_res: float = 1.0 / (2 ** 7 - 2)  # 7 bit DAC.
     inp_sto_round: bool = False
 
     out_bound: float = 20.0
     out_noise: float = 0.1
-    out_res: float = 1.0 / (2**9 - 2)  # 9 bit ADC.
+    out_res: float = 1.0 / (2 ** 9 - 2)  # 9 bit ADC.
 
     w_noise: float = 0.0
     w_noise_type: WeightNoiseType = WeightNoiseType.NONE

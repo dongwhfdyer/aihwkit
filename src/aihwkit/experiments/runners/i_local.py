@@ -28,6 +28,7 @@ class InferenceLocalRunner(Runner):
 
     Class that allows executing Experiments locally.
     """
+
     # pylint: disable=too-few-public-methods
 
     def __init__(self,

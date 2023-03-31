@@ -58,7 +58,6 @@ from aihwkit.nn.conversion import convert_to_analog_mapped
 from aihwkit.nn import AnalogSequential
 from aihwkit.optim import AnalogSGD
 
-
 # BERT model from Hugging Face model hub fine-tuned on SQuAD v1
 MODEL_NAME = "csarron/bert-base-uncased-squad-v1"
 TOKENIZER = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -272,8 +271,8 @@ def preprocess_train(dataset):
             # Detect if the answer is out of the span
             # (in which case this feature is labeled with the CLS index).
             if not (
-                offsets[token_start_index][0] <= start_char
-                and offsets[token_end_index][1] >= end_char
+                    offsets[token_start_index][0] <= start_char
+                    and offsets[token_end_index][1] >= end_char
             ):
                 tokenized_dataset["start_positions"].append(cls_index)
                 tokenized_dataset["end_positions"].append(cls_index)
@@ -283,8 +282,8 @@ def preprocess_train(dataset):
                 # Note: we could go after the last offset
                 # if the answer is the last word (edge case).
                 while (
-                    token_start_index < len(offsets)
-                    and offsets[token_start_index][0] <= start_char
+                        token_start_index < len(offsets)
+                        and offsets[token_start_index][0] <= start_char
                 ):
                     token_start_index += 1
                 tokenized_dataset["start_positions"].append(token_start_index - 1)
@@ -351,7 +350,7 @@ def preprocess_validation(dataset):
 
 
 def postprocess_predictions(
-    examples, features, raw_predictions, n_best_size=20, max_answer_length=30
+        examples, features, raw_predictions, n_best_size=20, max_answer_length=30
 ):
     """Postprocess raw predictions"""
     features.set_format(
@@ -406,18 +405,18 @@ def postprocess_predictions(
                     # out of bounds or correspond
                     # to part of the input_ids that are not in the context.
                     if (
-                        start_index >= len(offset_mapping)
-                        or end_index >= len(offset_mapping)
-                        or offset_mapping[start_index] is None
-                        or offset_mapping[end_index] is None
+                            start_index >= len(offset_mapping)
+                            or end_index >= len(offset_mapping)
+                            or offset_mapping[start_index] is None
+                            or offset_mapping[end_index] is None
                     ):
                         continue
 
                     # Don't consider answers with a length
                     # that is either < 0 or > max_answer_length.
                     if (
-                        end_index < start_index
-                        or end_index - start_index + 1 > max_answer_length
+                            end_index < start_index
+                            or end_index - start_index + 1 > max_answer_length
                     ):
                         continue
 
@@ -512,7 +511,7 @@ def make_trainer(model, optimizer, tokenized_data):
 
 
 def do_inference(
-    model, trainer, squad, eval_data, writer, max_inference_time=1e6, n_times=9
+        model, trainer, squad, eval_data, writer, max_inference_time=1e6, n_times=9
 ):
     """Perform inference experiment at weight noise level specified at runtime.
     SQuAD exact match and f1 metrics are captured in Tensorboard

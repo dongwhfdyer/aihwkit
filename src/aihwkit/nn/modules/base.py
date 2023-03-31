@@ -544,8 +544,8 @@ class AnalogModuleBase(Module):
                 state_dict.pop(key)
 
         super()._load_from_state_dict(
-           state_dict, prefix, local_metadata, strict, missing_keys,
-           unexpected_keys, error_msgs)
+            state_dict, prefix, local_metadata, strict, missing_keys,
+            unexpected_keys, error_msgs)
 
         # legacy
         for part in [self.ANALOG_SHARED_WEIGHT_PREFIX,

@@ -28,7 +28,7 @@ from aihwkit.simulator.configs import InferenceRPUConfig
 from aihwkit.simulator.presets.web import (
     WebComposerInferenceRPUConfig, OldWebComposerInferenceRPUConfig)
 
-from aihwkit.cloud.converter.definitions.i_onnx_common_pb2 import (   # type: ignore[attr-defined]
+from aihwkit.cloud.converter.definitions.i_onnx_common_pb2 import (  # type: ignore[attr-defined]
     AttributeProto
 )
 from aihwkit.cloud.converter.exceptions import ConversionError
@@ -38,7 +38,6 @@ from aihwkit.nn import (
 )
 from aihwkit.optim import AnalogSGD
 from aihwkit.cloud.converter.v1.rpu_config_info import RPUconfigInfo
-
 
 Type = namedtuple('Type', ['attribute_type', 'field', 'fn'])
 
@@ -58,6 +57,8 @@ TYPES_LISTS = {
               lambda x: [y.encode('utf-8') for y in x]),
     float: Type(AttributeProto.AttributeType.FLOATS, 'floats', lambda x: x)  # type: ignore
 }
+
+
 # pylint: enable=no-member
 
 

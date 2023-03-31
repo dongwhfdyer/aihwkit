@@ -98,6 +98,7 @@ def save_plots_for_web(
         path: the path where the images will be stored.
         file_format: the image format.
     """
+
     def camel_to_snake(source: str) -> str:
         """Convert a CamelCase string into snake-case."""
         return ''.join(['_' + char.lower() if char.isupper() else char

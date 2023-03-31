@@ -26,7 +26,7 @@ from torch.nn.functional import mse_loss
 # Imports from aihwkit.
 from aihwkit.nn import (
     AnalogLinearMapped, AnalogConv1dMapped,
-    AnalogConv2dMapped,  AnalogConv3dMapped
+    AnalogConv2dMapped, AnalogConv3dMapped
 )
 from aihwkit.optim import AnalogSGD
 

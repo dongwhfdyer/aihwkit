@@ -42,6 +42,7 @@ from .helpers.testcases import SKIP_CUDA_TESTS
 )
 class AnalogLayerTest(ParametrizedTestCase):
     """Analog layers abstraction tests."""
+
     # pylint: disable=no-member
 
     def test_realistic_weights(self):

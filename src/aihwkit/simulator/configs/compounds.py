@@ -613,7 +613,7 @@ class DigitalRankUpdateCell(_PrintableMixin):
                   OneSidedUnitCell,
                   VectorUnitCell,
                   ReferenceUnitCell] = field(
-                      default_factory=VectorUnitCell)
+        default_factory=VectorUnitCell)
     """(Analog) device that are used for forward and backward."""
 
     construction_seed: int = 0

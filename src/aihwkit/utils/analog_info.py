@@ -68,7 +68,7 @@ class TileInfo:
         self.phy_in_size = tile.rpu_config.mapping.max_input_size
         self.phy_out_size = tile.rpu_config.mapping.max_output_size
         self.is_mapped = is_mapped
-        max_space = (self.phy_in_size*self.phy_out_size)
+        max_space = (self.phy_in_size * self.phy_out_size)
         log_space = (self.log_in_size * self.log_out_size)
         self.utilization = log_space * 100 / max_space if is_mapped else 100
 
@@ -174,12 +174,12 @@ class LayerInfo:
     def __repr__(self) -> str:
         """Print layer's information in the summary table."""
         stats = self.layer_summary_dict().values()
-        result = (("{:<20}"*len(stats)).format(*stats))
+        result = (("{:<20}" * len(stats)).format(*stats))
         result += "\n"
         for tile in self.tiles_info:
             tile_info = tile.tile_summary_dict()
             tile_info["utilization"] = FLOAT_FORMAT.format(tile_info["utilization"])
-            result += (" "*20*(len(stats)-3))
+            result += (" " * 20 * (len(stats) - 3))
             result += ("{:<20}{:<20}{:<20}\n".format(*(tile_info.values())))
         return result
 
@@ -255,13 +255,13 @@ class AnalogInfo:
             header_i = [v for x, v in header if x == i]
             trim_length = (COLUMN_WIDTH * len(header_i) - len(category))
             result += category + " " * trim_length
-            if i == len(COLUMN_DEFINITIONS)-1:
+            if i == len(COLUMN_DEFINITIONS) - 1:
                 break
             result += '| '
-        result += "\n"+divider
+        result += "\n" + divider
         for i, category in enumerate(COLUMN_DEFINITIONS):
             header_i = [v for x, v in header if x == i]
-            result += (("{:<20}"*len(header_i)).format(*header_i))
+            result += (("{:<20}" * len(header_i)).format(*header_i))
         result += "\n"
 
         for x in self.layer_summary:

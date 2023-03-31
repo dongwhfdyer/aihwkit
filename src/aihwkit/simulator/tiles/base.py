@@ -75,6 +75,7 @@ class BaseTile(Generic[RPUConfigGeneric]):
         in_trans: Whether to assume an transposed input (batch first)
         out_trans: Whether to assume an transposed output (batch first)
     """
+
     # pylint: disable=too-many-instance-attributes,too-many-public-methods
 
     def __init__(
@@ -707,7 +708,7 @@ class BaseTile(Generic[RPUConfigGeneric]):
 
         if isinstance(mapping_scales, float):
             if self.mapping_scales is None:
-                self.mapping_scales = ones((1, ),
+                self.mapping_scales = ones((1,),
                                            dtype=float32,
                                            device=self.device,
                                            requires_grad=False)
@@ -736,12 +737,12 @@ class BaseTile(Generic[RPUConfigGeneric]):
         mapping_scales = None
         if mapping.weight_scaling_omega:
             if mapping.weight_scaling_columnwise:
-                mapping_scales = ones((self.out_size, ),
+                mapping_scales = ones((self.out_size,),
                                       dtype=float32,
                                       device=self.device,
                                       requires_grad=False)
             else:
-                mapping_scales = ones((1, ),
+                mapping_scales = ones((1,),
                                       dtype=float32,
                                       device=self.device,
                                       requires_grad=False)
@@ -828,12 +829,12 @@ class BaseTile(Generic[RPUConfigGeneric]):
         mapping = self.rpu_config.mapping  # type: ignore
         if mapping.learn_out_scaling:
             if mapping.out_scaling_columnwise:
-                self.out_scaling_alpha = ones((self.out_size, ),
+                self.out_scaling_alpha = ones((self.out_size,),
                                               dtype=float32,
                                               device=self.device,
                                               requires_grad=True)
             else:
-                self.out_scaling_alpha = ones((1, ),
+                self.out_scaling_alpha = ones((1,),
                                               dtype=float32,
                                               device=self.device,
                                               requires_grad=True)
@@ -1193,7 +1194,7 @@ class BaseTile(Generic[RPUConfigGeneric]):
 
         if self.input_range is not None and ctx is not None:
             # compute gradient of the clip
-            x_input,  = ctx.saved_tensors
+            x_input, = ctx.saved_tensors
             ir_params = self.rpu_config.pre_post.input_range  # type: ignore
 
             upper_thres = x_input >= self.input_range
@@ -1211,12 +1212,12 @@ class BaseTile(Generic[RPUConfigGeneric]):
             if ir_params.manage_output_clipping:
                 output_percentage = getattr(ctx, 'output_percentage', 1.0)
                 grad -= (1.0 - output_percentage) * self.input_range * (
-                    output_percentage < ir_params.output_min_percentage)
+                        output_percentage < ir_params.output_min_percentage)
 
             if ir_params.decay > 0:
                 percentage = (x_input.abs() < self.input_range).float().mean()
                 grad += ir_params.decay * self.input_range * (
-                    percentage > ir_params.input_min_percentage)
+                        percentage > ir_params.input_min_percentage)
 
             if self.input_range.grad is None:
                 self.input_range.grad = grad

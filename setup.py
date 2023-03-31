@@ -26,6 +26,7 @@ INSTALL_REQUIRES = [
     'protobuf>=4.21.6',
 ]
 
+
 def get_version() -> str:
     """Get the package version."""
     version_path = os.path.join(

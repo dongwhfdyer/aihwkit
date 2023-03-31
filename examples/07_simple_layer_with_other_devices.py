@@ -51,7 +51,6 @@ rpu_config.device = VectorUnitCell(
 # weights.
 rpu_config.device.update_policy = VectorUnitCellUpdatePolicy.SINGLE_RANDOM
 
-
 model = AnalogLinear(4, 2, bias=True, rpu_config=rpu_config)
 
 print(rpu_config)

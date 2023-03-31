@@ -58,7 +58,6 @@ WITH_BIDIR = False
 USE_ANALOG_TRAINING = False  # or hardware-aware training
 DEVICE = torch.device('cuda') if cuda.is_compiled() else torch.device('cpu')
 
-
 if USE_ANALOG_TRAINING:
     # Define a RPU configuration for analog training
     rpu_config = GokmenVlasovPreset()
@@ -96,7 +95,7 @@ class AnalogBidirRNNNetwork(AnalogSequential):
         self.rnn = AnalogRNN(RNN_CELL, EMBED_SIZE, HIDDEN_SIZE, bidir=True, num_layers=1,
                              dropout=DROPOUT_RATIO, bias=True,
                              rpu_config=rpu_config)
-        self.decoder = AnalogLinear(2*HIDDEN_SIZE, OUTPUT_SIZE, bias=True)
+        self.decoder = AnalogLinear(2 * HIDDEN_SIZE, OUTPUT_SIZE, bias=True)
 
     def forward(self, input, in_states=None):
         embed = self.dropout(self.embedding(input))
@@ -115,7 +114,7 @@ class AnalogBidirRNNNetwork_noEmbedding(AnalogSequential):
         self.rnn = AnalogRNN(RNN_CELL, INPUT_SIZE, HIDDEN_SIZE, bidir=True, num_layers=1,
                              dropout=DROPOUT_RATIO, bias=True,
                              rpu_config=rpu_config)
-        self.decoder = AnalogLinear(2*HIDDEN_SIZE, OUTPUT_SIZE, bias=True,
+        self.decoder = AnalogLinear(2 * HIDDEN_SIZE, OUTPUT_SIZE, bias=True,
                                     rpu_config=rpu_config)
 
     def forward(self, input, in_states=None):
@@ -169,20 +168,19 @@ RESULTS = os.path.join(os.getcwd(), 'results', 'RNN')
 os.makedirs(RESULTS, exist_ok=True)
 
 # Make dataset
-x = torch.linspace(0, 8*np.pi, SEQ_LEN, device=DEVICE)
-y = torch.sin(x)*torch.cos(0.5*x) + 0.5
-y_in_1d = y[0:SEQ_LEN-1]
+x = torch.linspace(0, 8 * np.pi, SEQ_LEN, device=DEVICE)
+y = torch.sin(x) * torch.cos(0.5 * x) + 0.5
+y_in_1d = y[0:SEQ_LEN - 1]
 y_out_1d = y[1:SEQ_LEN]
 
 y_in_2d, y_out_2d = [], []
 for i in range(BATCH_SIZE):
-    y_in_2d.append(torch.roll(y_in_1d, shifts=100*i, dims=0)
+    y_in_2d.append(torch.roll(y_in_1d, shifts=100 * i, dims=0)
                    + NOISE * torch.rand(y_in_1d.shape, device=DEVICE))
-    y_out_2d.append(torch.roll(y_out_1d, shifts=100*i, dims=0)
+    y_out_2d.append(torch.roll(y_out_1d, shifts=100 * i, dims=0)
                     + NOISE * torch.rand(y_out_1d.shape, device=DEVICE))
 y_in = torch.stack(y_in_2d, dim=0).transpose(0, 1).unsqueeze(2)
 y_out = torch.stack(y_out_2d, dim=0).transpose(0, 1).unsqueeze(2)
-
 
 if WITH_EMBEDDING:
     if WITH_BIDIR:

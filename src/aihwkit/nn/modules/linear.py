@@ -65,7 +65,7 @@ class AnalogLinear(AnalogModuleBase, Linear):
             rpu_config: Optional[RPUConfigAlias] = None,
             realistic_read_write: bool = False,
             weight_scaling_omega: Optional[bool] = None
-              ):
+    ):
         # Call super() after tile creation, including ``reset_parameters``.
         Linear.__init__(self, in_features, out_features, bias=bias)
 
@@ -141,10 +141,10 @@ class AnalogLinear(AnalogModuleBase, Linear):
         # pylint: disable=arguments-differ, arguments-renamed
 
         out = AnalogFunction.apply(
-                self.analog_tile.get_analog_ctx(), x_input,
-                self.analog_tile.shared_weights, not self.training)
+            self.analog_tile.get_analog_ctx(), x_input,
+            self.analog_tile.shared_weights, not self.training)
 
-        out = self.analog_tile.apply_out_scaling(out, (-1, ))
+        out = self.analog_tile.apply_out_scaling(out, (-1,))
 
         if self.digital_bias:
             return out + self.bias

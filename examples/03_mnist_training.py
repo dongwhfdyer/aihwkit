@@ -154,7 +154,7 @@ def train(model, train_set):
         # Decay learning rate if needed.
         scheduler.step()
 
-    print('\nTraining Time (s) = {}'.format(time()-time_init))
+    print('\nTraining Time (s) = {}'.format(time() - time_init))
 
 
 def test_evaluation(model, val_set):
@@ -183,7 +183,7 @@ def test_evaluation(model, val_set):
         predicted_ok += (predicted == labels).sum().item()
 
     print('\nNumber Of Images Tested = {}'.format(total_images))
-    print('Model Accuracy = {}'.format(predicted_ok/total_images))
+    print('Model Accuracy = {}'.format(predicted_ok / total_images))
 
 
 def main():

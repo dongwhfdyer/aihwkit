@@ -38,7 +38,7 @@ from aihwkit.optim import AnalogSGD
 from aihwkit.simulator.configs import (
     InferenceRPUConfig, UnitCellRPUConfig, SingleRPUConfig,
     BufferedTransferCompound, SoftBoundsDevice,
-    ConstantStepDevice,  MappingParameter, IOParameters, UpdateParameters
+    ConstantStepDevice, MappingParameter, IOParameters, UpdateParameters
 )
 from aihwkit.simulator.rpu_base import cuda
 

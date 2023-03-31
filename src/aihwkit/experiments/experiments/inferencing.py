@@ -20,7 +20,6 @@ from copy import deepcopy
 from requests import get as requests_get
 from numpy import ndarray, array, logspace, log10, zeros, concatenate
 
-
 from torch import device as torch_device, max as torch_max, Tensor
 from torch import load
 from torch.nn import Module, CrossEntropyLoss
@@ -31,7 +30,6 @@ from torchvision.transforms import Compose, Normalize, ToTensor
 
 from aihwkit.experiments.experiments.base import Experiment, Signals
 from aihwkit.nn.modules.base import AnalogModuleBase
-
 
 WEIGHT_TEMPLATE_URL = "https://github.com/IBM-AI-Hardware-Center/Composer/raw/main/"
 
@@ -100,7 +98,7 @@ class BasicInferencing(Experiment):
 
     def get_dataset_arguments(self, dataset: type) -> Tuple[Dict, Dict]:
         """Return the dataset constructor arguments for specifying subset."""
-        if dataset in (SVHN, ):
+        if dataset in (SVHN,):
             return {'split': 'train'}, {'split': 'test'}
         return {'train': True}, {'train': False}
 
@@ -390,11 +388,11 @@ class BasicInferencing(Experiment):
         """Return a string representation of a BasicInferencing experiment."""
         return ('{}(dataset={}, batch_size={}, loss_function={}, inference_repeats={}, '
                 'inference_time={}, model={})'.format(
-                    self.__class__.__name__,
-                    getattr(self.dataset, '__name__', self.dataset),
-                    self.batch_size,
-                    getattr(self.loss_function, '__name__', self.loss_function),
-                    self.inference_repeats,
-                    self.inference_time,
-                    self.model
-                ))
+            self.__class__.__name__,
+            getattr(self.dataset, '__name__', self.dataset),
+            self.batch_size,
+            getattr(self.loss_function, '__name__', self.loss_function),
+            self.inference_repeats,
+            self.inference_time,
+            self.model
+        ))

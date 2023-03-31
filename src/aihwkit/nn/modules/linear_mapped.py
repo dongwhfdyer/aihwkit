@@ -283,7 +283,7 @@ class AnalogLinearMapped(AnalogModuleBase, Linear):
                 analog_tile.get_analog_ctx(), x_input,
                 analog_tile.shared_weights, not self.training)
 
-            out = analog_tile.apply_out_scaling(out, (-1, ))
+            out = analog_tile.apply_out_scaling(out, (-1,))
 
             if self.digital_bias:
                 return out + self.bias
@@ -301,7 +301,7 @@ class AnalogLinearMapped(AnalogModuleBase, Linear):
                     analog_tile.get_analog_ctx(), x,
                     analog_tile.shared_weights, not self.training)
 
-                output = analog_tile.apply_out_scaling(output, (-1, ))
+                output = analog_tile.apply_out_scaling(output, (-1,))
                 out_result.append(output)
 
             if idx == 0:

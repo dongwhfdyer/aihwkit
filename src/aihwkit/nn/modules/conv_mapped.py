@@ -479,6 +479,7 @@ class AnalogConv1dMapped(_AnalogConvNdMapped):
             :class:`aihwkit.simulator.configs.utils.MappingParameter`
             instead to specify weight scaling
     """
+
     # pylint: disable=abstract-method
 
     def __init__(
@@ -654,6 +655,7 @@ class AnalogConv2dMapped(_AnalogConvNdMapped):
             None (default), it will use implicit indexing for CUDA and
             explicit unfolding for CPU
     """
+
     # pylint: disable=abstract-method
 
     def __init__(
@@ -819,6 +821,7 @@ class AnalogConv3dMapped(_AnalogConvNdMapped):
             maximal tile size, mapping cannot be done
 
     """
+
     # pylint: disable=abstract-method
 
     def __init__(

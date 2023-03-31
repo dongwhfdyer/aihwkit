@@ -49,7 +49,6 @@ PATH_DATASET = os.path.join('data', 'DATASET')
 # Path to store results
 RESULTS = os.path.join(os.getcwd(), 'results', 'VGG8')
 
-
 # Training parameters
 SEED = 1
 N_EPOCHS = 20
@@ -208,8 +207,8 @@ def test_evaluation(validation_data, model, criterion):
         _, predicted = torch_max(pred.data, 1)
         total_images += labels.size(0)
         predicted_ok += (predicted == labels).sum().item()
-        accuracy = predicted_ok/total_images*100
-        error = (1-predicted_ok/total_images)*100
+        accuracy = predicted_ok / total_images * 100
+        error = (1 - predicted_ok / total_images) * 100
 
     epoch_loss = total_loss / len(validation_data.dataset)
 

@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from aihwkit.simulator.configs import InferenceRPUConfig
     from aihwkit.simulator.tiles import BaseTile
 
+
 # pylint: disable=too-many-instance-attributes
 
 
@@ -93,7 +94,7 @@ class InferenceTile(AnalogTile):
         remap = self.rpu_config.remap  # type: ignore
         if remap.type != WeightRemapType.NONE:
             # needs to be always out_size
-            mapping_scales = ones((self.out_size, ),
+            mapping_scales = ones((self.out_size,),
                                   dtype=float32,
                                   device=self.device,
                                   requires_grad=False)

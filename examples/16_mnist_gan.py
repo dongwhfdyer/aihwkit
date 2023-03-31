@@ -53,6 +53,7 @@ from aihwkit.simulator.rpu_base import cuda
 
 # As an example we use a mixed precision preset using an ECRAM device model
 from aihwkit.simulator.configs import MappingParameter
+
 mapping = MappingParameter(weight_scaling_omega=0.8)
 RPU_CONFIG = MixedPrecisionEcRamMOPreset(mapping=mapping)
 
@@ -313,7 +314,7 @@ def get_gen_loss(gen, disc, criterion, num_images, z_dim, device):
 
 
 def training_loop(
-    gen, disc, gen_opt, disc_opt, criterion, dataloader, n_epochs, display_step
+        gen, disc, gen_opt, disc_opt, criterion, dataloader, n_epochs, display_step
 ):
     """Training loop.
 

@@ -236,6 +236,7 @@ class AnalogConv1d(_AnalogConvNd):
             :class:`aihwkit.simulator.configs.utils.MappingParameter`
             instead to specify weight scaling
     """
+
     # pylint: disable=abstract-method
 
     def __init__(
@@ -404,6 +405,7 @@ class AnalogConv2d(_AnalogConvNd):
             None (default), it will use implicit indexing for CUDA and
             explicit unfolding for CPU
     """
+
     # pylint: disable=abstract-method
 
     def __init__(
@@ -558,6 +560,7 @@ class AnalogConv3d(_AnalogConvNd):
             :class:`aihwkit.simulator.configs.utils.MappingParameter`
             instead to specify weight scaling
     """
+
     # pylint: disable=abstract-method
 
     def __init__(

@@ -17,7 +17,6 @@ from typing import Dict
 
 from aihwkit.cloud.client.session import ApiSession
 
-
 Endpoint = namedtuple('Endpoint', ['url', 'method'])
 
 

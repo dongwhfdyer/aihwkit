@@ -330,7 +330,7 @@ class Convolution1dLayerTest(ConvolutionLayerTest):
         # Assert the number of elements of the weights.
         tile_weights, tile_biases = model.analog_tile.get_weights()
 
-        self.assertEqual(tile_weights.numel(), 2*3*4)
+        self.assertEqual(tile_weights.numel(), 2 * 3 * 4)
         if model.analog_bias:
             self.assertEqual(tile_biases.numel(), 3)
 
@@ -559,7 +559,7 @@ class Convolution2dLayerTest(ConvolutionLayerTest):
         # Assert the number of elements of the weights.
         tile_weights, tile_biases = model.analog_tile.get_weights()
 
-        self.assertEqual(tile_weights.numel(), 2*3*4*4)
+        self.assertEqual(tile_weights.numel(), 2 * 3 * 4 * 4)
         if model.analog_bias:
             self.assertEqual(tile_biases.numel(), 3)
 
@@ -755,7 +755,7 @@ class Convolution3dLayerTest(ConvolutionLayerTest):
         # Assert the number of elements of the weights.
         tile_weights, tile_biases = model.analog_tile.get_weights()
 
-        self.assertEqual(tile_weights.numel(), 2*3*4*4*4)
+        self.assertEqual(tile_weights.numel(), 2 * 3 * 4 * 4 * 4)
         if model.analog_bias:
             self.assertEqual(tile_biases.numel(), 3)
 

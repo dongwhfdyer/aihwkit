@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 # (C) Copyright 2020, 2021, 2022 IBM. All Rights Reserved.
@@ -80,7 +79,6 @@ class BaseNoiseModel:
         noisy_conductances = []
         nu_drift_list = []
         for g_target in target_conductances:
-
             noisy_conductances.append(self.apply_programming_noise_to_conductance(g_target))
             nu_drift_list.append(self.generate_drift_coefficients(g_target))
         noisy_weights = self.g_converter.convert_back_to_weights(noisy_conductances, params)

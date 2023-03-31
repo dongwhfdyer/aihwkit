@@ -195,7 +195,7 @@ class TileTest(ParametrizedTestCase):
 
         if not hasattr(rpu_config.device, 'diffusion'):
             if hasattr(rpu_config.device, 'unit_cell_devices') \
-               and hasattr(rpu_config.device.unit_cell_devices[-1], 'diffusion'):
+                    and hasattr(rpu_config.device.unit_cell_devices[-1], 'diffusion'):
                 rpu_config.device.unit_cell_devices[-1].diffusion = 0.323
             else:
                 raise SkipTest('This device does not support diffusion')
@@ -223,7 +223,7 @@ class TileTest(ParametrizedTestCase):
 
         if not hasattr(rpu_config.device, 'lifetime'):
             if hasattr(rpu_config.device, 'unit_cell_devices') \
-               and hasattr(rpu_config.device.unit_cell_devices[-1], 'lifetime'):
+                    and hasattr(rpu_config.device.unit_cell_devices[-1], 'lifetime'):
                 for idx, _ in enumerate(rpu_config.device.unit_cell_devices):
                     rpu_config.device.unit_cell_devices[idx].lifetime = 100.
             else:
@@ -251,7 +251,7 @@ class TileTest(ParametrizedTestCase):
         rpu_config = self.get_rpu_config()
 
         if not isinstance(rpu_config, UnitCellRPUConfig) \
-           or not isinstance(rpu_config.device, (VectorUnitCell, ReferenceUnitCell)):
+                or not isinstance(rpu_config.device, (VectorUnitCell, ReferenceUnitCell)):
             analog_tile = self.get_tile(2, 3, rpu_config=rpu_config, bias=False)
             index = analog_tile.get_hidden_update_index()
             self.assertEqual(index, 0)

@@ -36,6 +36,7 @@ class AnalogVanillaRNNCell(AnalogSequential):
         realistic_read_write: whether to enable realistic read/write
             for setting initial weights and read out of weights
     """
+
     # pylint: disable=abstract-method
     def __init__(
             self,
@@ -97,6 +98,7 @@ class AnalogLSTMCell(AnalogSequential):
         realistic_read_write: whether to enable realistic read/write
             for setting initial weights and read out of weights
     """
+
     # pylint: disable=abstract-method
 
     def __init__(
@@ -137,7 +139,6 @@ class AnalogLSTMCell(AnalogSequential):
 
     def forward(self, input_: Tensor,
                 state: Tuple[Tensor, Tensor]) -> Tuple[Tensor, Tuple[Tensor, Tensor]]:
-
         # pylint: disable=arguments-differ
         h_x, c_x = state
         gates = self.weight_ih(input_) + self.weight_hh(h_x)
@@ -165,6 +166,7 @@ class AnalogLSTMCellCombinedWeight(AnalogSequential):
         realistic_read_write: whether to enable realistic read/write
             for setting initial weights and during reading of the weights.
     """
+
     # pylint: disable=abstract-method
 
     def __init__(
@@ -204,7 +206,6 @@ class AnalogLSTMCellCombinedWeight(AnalogSequential):
 
     def forward(self, input_: Tensor,
                 state: Tuple[Tensor, Tensor]) -> Tuple[Tensor, Tuple[Tensor, Tensor]]:
-
         # pylint: disable=arguments-differ
         h_x, c_x = state
         x_input = cat((input_, h_x), 1)
@@ -233,6 +234,7 @@ class AnalogGRUCell(AnalogSequential):
         realistic_read_write: whether to enable realistic read/write
             for setting initial weights and read out of weights
     """
+
     # pylint: disable=abstract-method
 
     def __init__(
@@ -271,7 +273,6 @@ class AnalogGRUCell(AnalogSequential):
         return zeros(batch_size, self.hidden_size, device=device)
 
     def forward(self, input_: Tensor, state: Tensor) -> Tuple[Tensor, Tensor]:
-
         # pylint: disable=arguments-differ
 
         g_i = self.weight_ih(input_)

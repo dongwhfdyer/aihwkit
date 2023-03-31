@@ -117,7 +117,6 @@ class InferenceTileTest(ParametrizedTestCase):
         opt_torch = SGD(model_torch.parameters(), lr=0.1)
 
         for _ in range(100):
-
             # inference
             opt.zero_grad()
             pred = model(x)

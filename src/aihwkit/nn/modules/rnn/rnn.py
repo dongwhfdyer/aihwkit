@@ -78,7 +78,7 @@ class ModularRNN(AnalogSequential):
             but where torch.nn.Module methods can be applied
         """
         layers = [layer(*first_layer_args)] \
-            + [layer(*other_layer_args) for _ in range(num_layers - 1)]
+                 + [layer(*other_layer_args) for _ in range(num_layers - 1)]
         return ModuleList(layers)
 
     def get_zero_state(self, batch_size: int) -> List[Tensor]:
@@ -130,6 +130,7 @@ class AnalogRNN(AnalogSequential):
         bidir: if True, becomes a bidirectional RNN
         dropout: dropout applied to output of all RNN layers except last
     """
+
     # pylint: disable=abstract-method, too-many-arguments
 
     def __init__(
@@ -144,7 +145,7 @@ class AnalogRNN(AnalogSequential):
             num_layers: int = 1,
             bidir: bool = False,
             dropout: float = 0.0
-            ):
+    ):
         super().__init__()
 
         if bidir:
@@ -158,7 +159,7 @@ class AnalogRNN(AnalogSequential):
             num_layers, layer, dropout,
             first_layer_args=[cell, input_size, hidden_size, bias,
                               rpu_config, realistic_read_write],
-            other_layer_args=[cell, num_dirs*hidden_size, hidden_size, bias,
+            other_layer_args=[cell, num_dirs * hidden_size, hidden_size, bias,
                               rpu_config, realistic_read_write])
         self.hidden_size = hidden_size
         self.num_layers = num_layers
@@ -181,6 +182,7 @@ class AnalogRNN(AnalogSequential):
             If no bias init function is provided the weight init
             function is taken for the bias as well.
         """
+
         def init_analog_layer(layer: AnalogModuleBase) -> None:
             """Init the weights and bias of an analog linear layer."""
             weight_init_fn(layer.weight.data)

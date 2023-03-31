@@ -23,6 +23,7 @@ from aihwkit.exceptions import ConfigError
 if version_info[0] >= 3 and version_info[1] > 7:
     # pylint: disable=no-name-in-module
     from typing import get_origin  # type: ignore
+
     HAS_ORIGIN = True
 else:
     HAS_ORIGIN = False
@@ -73,8 +74,8 @@ def parameters_to_bindings(params: Any, check_fields: bool = True) -> Any:
             if HAS_ORIGIN:
                 expected_type = get_origin(dataclass_field.type) or dataclass_field.type
                 if ((not isinstance(value, expected_type))
-                    and not (expected_type == float and isinstance(value, int)
-                             and not isinstance(value, bool))):
+                        and not (expected_type == float and isinstance(value, int)
+                                 and not isinstance(value, bool))):
                     raise ConfigError(f"Expected type {expected_type} for field {field}")
 
             setattr(result, field, value)
@@ -113,6 +114,7 @@ def tile_parameters_to_bindings(params: Any) -> Any:
 
 class _PrintableMixin:
     """Helper class for pretty-printing of config dataclasses."""
+
     # pylint: disable=too-few-public-methods
 
     def __str__(self) -> str:
@@ -142,7 +144,7 @@ class _PrintableMixin:
             if force_multiline or len(lines_list) > 3 or any(
                     '\n' in line for line in lines_list):
                 # Return a multi-line string.
-                lines_str = indent(',\n'.join(lines_list), ' '*indent_)
+                lines_str = indent(',\n'.join(lines_list), ' ' * indent_)
                 prefix = '{}\n'.format(prefix) if prefix else prefix
                 suffix = '\n{}'.format(suffix) if suffix else suffix
             else:
@@ -168,7 +170,7 @@ class _PrintableMixin:
             if isinstance(field_value, list) and len(value) > 0:
                 # For non-emtpy lists, always use multiline, with one item per line.
                 for item in field_value:
-                    field_lines.append(indent('{}'.format(str(item)), ' '*4))
+                    field_lines.append(indent('{}'.format(str(item)), ' ' * 4))
                 force_multiline = True
             else:
                 field_lines.append(str(field_value))

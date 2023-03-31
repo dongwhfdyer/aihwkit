@@ -70,7 +70,7 @@ def convert_to_analog(
         conversion_map: Optional[Dict] = None,
         specific_rpu_config_fun: Optional[Callable] = None,
         module_name: str = '',
-        ) -> Module:
+) -> Module:
     """Convert a given digital model to analog counter parts.
 
     Note:
@@ -141,7 +141,7 @@ def convert_to_analog(
                                         full_name)
 
         elif mod.__class__ in conversion_map:
-            new_mod = conversion_map[mod.__class__].from_digital(   # type: ignore
+            new_mod = conversion_map[mod.__class__].from_digital(  # type: ignore
                 mod,
                 specific_rpu_config_fun(full_name, mod, deepcopy(rpu_config)),
                 realistic_read_write)

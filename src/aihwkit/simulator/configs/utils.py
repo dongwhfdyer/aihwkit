@@ -64,7 +64,7 @@ class IOParameters(_PrintableMixin):
     before the multiplication).
     """
 
-    inp_res: float = 1 / (2**7 - 2)
+    inp_res: float = 1 / (2 ** 7 - 2)
     r"""Number of discretization steps for DAC (:math:`\le0` means infinite steps)
     or resolution (1/steps)."""
 
@@ -91,7 +91,7 @@ class IOParameters(_PrintableMixin):
     i.e. noisiness of device summation at the output.
     """
 
-    out_res: float = 1 / (2**9 - 2)
+    out_res: float = 1 / (2 ** 9 - 2)
     """Number of discretization steps for ADC or resolution.
 
     Number of discretization steps for ADC (:math:`<=0` means infinite steps)

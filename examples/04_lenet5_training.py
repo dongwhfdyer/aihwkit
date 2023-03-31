@@ -185,8 +185,8 @@ def test_evaluation(validation_data, model, criterion):
         _, predicted = torch.max(pred.data, 1)
         total_images += labels.size(0)
         predicted_ok += (predicted == labels).sum().item()
-        accuracy = predicted_ok/total_images*100
-        error = (1-predicted_ok/total_images)*100
+        accuracy = predicted_ok / total_images * 100
+        error = (1 - predicted_ok / total_images) * 100
 
     epoch_loss = total_loss / len(validation_data.dataset)
 
